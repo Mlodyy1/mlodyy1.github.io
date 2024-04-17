@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #kwadratduzy{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        #kwadratmaly1,#kwadratmaly2,#kwadratmaly3{
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+        #kwadratmaly1{
+            background-color: yellow;
+        }
+        #kwadratmaly2{
+            background-color: green;
+        }
+        #kwadratmaly3{
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="nazw">Jakub Młodojewski</h1>
+    <p id="oceny"></p>
+    <input type="button" value="Info" onclick="info_oceny()">
+    <p id="oceny_info"></p>
+    <input type="password" name="" id="inputhaslo">
+    <input type="button" value="sprawdź siłę hasła" onclick="info_haslo()"><br><br>
+    <p id="haslo_info"></p>
+    <p id="tech19"></p>
+    <div id="kwadratduzy"></div><br>
+    <div id="kwadratmaly1" onmouseover="zmienkolor('yellow')" onmouseout="zmienkolor('red')"></div>
+    <div id="kwadratmaly2" onmouseover="zmienksztalt('50%')" onmouseout="zmienksztalt('0%')"></div>
+    <div id="kwadratmaly3" onmouseover="zmienkolornazw('yellow')" onmouseout="zmienkolornazw('black')"></div>
+    <script>
+        random_ocena1 = Math.floor(Math.random()*6) + 1
+        random_ocena2 = Math.floor(Math.random()*6) + 1
+        random_ocena3 = Math.floor(Math.random()*6) + 1
+        random_ocena4 = Math.floor(Math.random()*6) + 1
+        random_ocena5 = Math.floor(Math.random()*6) + 1
+        random_ocena6 = Math.floor(Math.random()*6) + 1
+        random_ocena7 = Math.floor(Math.random()*6) + 1
+        random_ocena8 = Math.floor(Math.random()*6) + 1
+        random_ocena9 = Math.floor(Math.random()*6) + 1
+        random_ocena10 = Math.floor(Math.random()*6) + 1
+        const oceny = [random_ocena1,random_ocena2,random_ocena3,random_ocena4,random_ocena5,random_ocena6,random_ocena7,random_ocena8,random_ocena9,random_ocena10];
+        document.getElementById("oceny").innerHTML=oceny
+        function info_oceny(){
+            let suma = 0
+            for (let i=0;i<oceny.length;i++){
+                suma+=oceny[i]
+            }
+            srednia = suma/oceny.length
+            document.getElementById("oceny_info").innerHTML+="Średnia: "+srednia.toFixed(2)+"<br>"
+            let zachowanie = oceny[oceny.length-1]
+            switch(zachowanie){
+                case 1:
+                    zachowanie="Niedostateczny"
+                    break;
+                case 2:
+                    zachowanie="Dopuszczający"
+                    break;
+                case 3:
+                    zachowanie="Dostateczny"
+                    break;
+                case 4:
+                    zachowanie="Dobry"
+                    break;
+                case 5:
+                    zachowanie="Bardzo Dobry"
+                    break;
+                case 6:
+                    zachowanie="Celujący"
+                    break;
+                default:
+                    zachowanie="Błąd!"
+                    break;
+            }
+            document.getElementById("oceny_info").innerHTML+="Ocena z zachowania: "+zachowanie+"<br>"
+            if (oceny.includes(1)){
+                document.getElementById("oceny_info").innerHTML+="Czy promocja: Nie<br>"
+            }
+            else {
+                document.getElementById("oceny_info").innerHTML+="Czy promocja: Tak<br>"
+            }
+            najwyzsza = Math.max(...oceny)
+            document.getElementById("oceny_info").innerHTML+="Najwyższa ocena: "+najwyzsza+"<br>"
+        }
+        function info_haslo() {
+         var haslo = document.getElementById("inputhaslo").value;
+          var haslo_info = document.getElementById("haslo_info");
+
+          if (haslo === "") {
+            haslo_info.style.color = 'red';
+            haslo_info.innerHTML = "Puste hasło";
+          }
+            else if (haslo.length < 4) {
+                haslo_info.style.color="pink"
+                haslo_info.innerHTML = "Słabe hasło"
+            }
+            else if (haslo.length >= 5 && haslo.length <= 8){
+                if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo)){
+                    haslo_info.style.color="yellow"
+                    haslo_info.innerHTML="Średnie hasło"
+                }
+                else {
+                    haslo_info.style.color="orange"
+                    haslo_info.innerHTML="Hasło słabe"
+                }
+            }
+            else if (haslo.length>8){
+                if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo) && /[0-9]/.test(haslo)){
+                    haslo_info.style.color="green"
+                    haslo_info.innerHTML="Silne hasło"
+                }
+                else {
+                    haslo_info.style.color="lime"
+                    haslo_info.innerHTML="Prawie silne hasło"
+                }
+            }
+            if (haslo.includes("tech19") || haslo.includes("TECH19")){
+                document.getElementById("tech19").innerHTML="hasło zawiera tech19"
+            }
+            else {
+                document.getElementById("tech19").innerHTML="hasło nie zawiera tech19"
+            }
+        
+    }
+    function zmienkolor(kolor){
+        document.getElementById("kwadratduzy").style.backgroundColor=kolor
+    }
+    function zmienksztalt(procent){
+        document.getElementById("kwadratduzy").style.borderRadius=procent
+    }
+    function zmienkolornazw(kolor){
+        document.getElementById("nazw").style.color=kolor
+    }
+    </script>
+
+</body>
+</html>
