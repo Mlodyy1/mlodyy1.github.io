@@ -5,144 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #kwadratduzy{
+        #duzy{
+            background-color: red;
             width: 300px;
             height: 300px;
-            background-color: red;
         }
-        #kwadratmaly1,#kwadratmaly2,#kwadratmaly3{
+        #maly1,#maly2,#maly3{
             width: 100px;
             height: 100px;
             float: left;
         }
-        #kwadratmaly1{
+        #maly1{
             background-color: yellow;
         }
-        #kwadratmaly2{
-            background-color: green;
+        #maly2{
+            background-color: aqua;
         }
-        #kwadratmaly3{
-            background-color: turquoise;
+        #maly3{
+            background-color: aquamarine;
         }
     </style>
 </head>
 <body>
     <h1 id="nazw">Jakub Młodojewski</h1>
     <p id="oceny"></p>
-    <input type="button" value="Info" onclick="info_oceny()">
+    <input type="button" value="info" onclick="info_oceny()">
     <p id="oceny_info"></p>
-    <input type="password" name="" id="inputhaslo">
-    <input type="button" value="sprawdź siłę hasła" onclick="info_haslo()"><br><br>
-    <p id="haslo_info"></p>
+    <input type="password" name="" id="haslo">
+    <input type="button" value="sila" onclick="sprawdzsile()">
+    <p id="sila"></p>
     <p id="tech19"></p>
-    <div id="kwadratduzy"></div><br>
-    <div id="kwadratmaly1" onmouseover="zmienkolor('yellow')" onmouseout="zmienkolor('red')"></div>
-    <div id="kwadratmaly2" onmouseover="zmienksztalt('50%')" onmouseout="zmienksztalt('0%')"></div>
-    <div id="kwadratmaly3" onmouseover="zmienkolornazw('yellow')" onmouseout="zmienkolornazw('black')"></div>
+    <div id="duzy"></div>
+    <div id="maly1" onmouseover="zmienkolorduzego('yellow')" onmouseout="zmienkolorduzego('red')"></div>
+    <div id="maly2" onmouseover="zmienksztalt('50%')" onmouseout="zmienksztalt('0%')"></div>
+    <div id="maly3" onmouseover="zmienkolornazw('yellow')" onmouseout="zmienkolornazw('black')"></div><br>
+    <input type="number" name="" id="procent" value="100" onkeyup="procenty()">
     <script>
-        random_ocena1 = Math.floor(Math.random()*6) + 1
-        random_ocena2 = Math.floor(Math.random()*6) + 1
-        random_ocena3 = Math.floor(Math.random()*6) + 1
-        random_ocena4 = Math.floor(Math.random()*6) + 1
-        random_ocena5 = Math.floor(Math.random()*6) + 1
-        random_ocena6 = Math.floor(Math.random()*6) + 1
-        random_ocena7 = Math.floor(Math.random()*6) + 1
-        random_ocena8 = Math.floor(Math.random()*6) + 1
-        random_ocena9 = Math.floor(Math.random()*6) + 1
-        random_ocena10 = Math.floor(Math.random()*6) + 1
-        const oceny = [random_ocena1,random_ocena2,random_ocena3,random_ocena4,random_ocena5,random_ocena6,random_ocena7,random_ocena8,random_ocena9,random_ocena10];
+        let ocena1 = Math.floor(Math.random()*6)+1
+        let ocena2 = Math.floor(Math.random()*6)+1
+        let ocena3 = Math.floor(Math.random()*6)+1
+        let ocena4 = Math.floor(Math.random()*6)+1
+        let ocena5 = Math.floor(Math.random()*6)+1
+        let ocena6 = Math.floor(Math.random()*6)+1
+        let ocena7 = Math.floor(Math.random()*6)+1
+        let ocena8 = Math.floor(Math.random()*6)+1
+        let ocena9 = Math.floor(Math.random()*6)+1
+        let ocena10 = Math.floor(Math.random()*6)+1
+        const oceny = [ocena1,ocena2,ocena3,ocena4,ocena5,ocena6,ocena7,ocena8,ocena9,ocena10]
         document.getElementById("oceny").innerHTML=oceny
         function info_oceny(){
             let suma = 0
             for (let i=0;i<oceny.length;i++){
                 suma+=oceny[i]
             }
-            srednia = suma/oceny.length
-            document.getElementById("oceny_info").innerHTML+="Średnia: "+srednia.toFixed(2)+"<br>"
-            let zachowanie = oceny[oceny.length-1]
+            srednia = (suma/oceny.length).toFixed(2)
+            document.getElementById("oceny_info").innerHTML+="Średnia: "+srednia+"<br>"
+            zachowanie = oceny[oceny.length-1]
             switch(zachowanie){
                 case 1:
-                    zachowanie="Niedostateczny"
+                    zachowanie = "Ndst"
                     break;
                 case 2:
-                    zachowanie="Dopuszczający"
+                    zachowanie="Dop"
                     break;
                 case 3:
-                    zachowanie="Dostateczny"
+                    zachowanie="Dst"
                     break;
                 case 4:
-                    zachowanie="Dobry"
+                    zachowanie="Db"
                     break;
                 case 5:
-                    zachowanie="Bardzo Dobry"
+                    zachowanie="Bdb"
                     break;
                 case 6:
-                    zachowanie="Celujący"
+                    zachowanie="Cel"
                     break;
                 default:
-                    zachowanie="Błąd!"
+                    zachowanie="Blad"
                     break;
             }
             document.getElementById("oceny_info").innerHTML+="Ocena z zachowania: "+zachowanie+"<br>"
             if (oceny.includes(1)){
-                document.getElementById("oceny_info").innerHTML+="Czy promocja: Nie<br>"
+                document.getElementById("oceny_info").innerHTML+="Czy promocja: Nie <br>"
             }
             else {
-                document.getElementById("oceny_info").innerHTML+="Czy promocja: Tak<br>"
+                document.getElementById("oceny_info").innerHTML+="Czy promocja: Tak <br>"
             }
-            najwyzsza = Math.max(...oceny)
-            document.getElementById("oceny_info").innerHTML+="Najwyższa ocena: "+najwyzsza+"<br>"
-        }
-        function info_haslo() {
-         var haslo = document.getElementById("inputhaslo").value;
-          var haslo_info = document.getElementById("haslo_info");
+            let najwyzsza = Math.max(...oceny)
+            document.getElementById("oceny_info").innerHTML+="Najwysza ocena: "+najwyzsza+"<br>"
 
-          if (haslo === "") {
-            haslo_info.style.color = 'red';
-            haslo_info.innerHTML = "Puste hasło";
-          }
-            else if (haslo.length < 4) {
-                haslo_info.style.color="pink"
-                haslo_info.innerHTML = "Słabe hasło"
+        }
+        function sprawdzsile(){
+            let haslo = document.getElementById("haslo").value
+            let sila = document.getElementById("sila")
+            if (haslo==""){
+                sila.style.color="red"
+                sila.innerHTML="Hasło puste"
+            }
+            else if (haslo.length<=4){
+                sila.style.color="pink"
+                sila.innerHTML="Hasło bardzo słabe"
             }
             else if (haslo.length >= 5 && haslo.length <= 8){
                 if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo)){
-                    haslo_info.style.color="yellow"
-                    haslo_info.innerHTML="Średnie hasło"
+                    sila.style.color="orange"
+                    sila.innerHTML="Hasło średnie"
                 }
                 else {
-                    haslo_info.style.color="orange"
-                    haslo_info.innerHTML="Hasło słabe"
+                    sila.style.color="yellow"
+                    sila.innerHTML="Hasło słabe"
                 }
             }
-            else if (haslo.length>8){
+            else if (haslo.length >8){
                 if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo) && /[0-9]/.test(haslo)){
-                    haslo_info.style.color="green"
-                    haslo_info.innerHTML="Silne hasło"
+                    sila.style.color="green"
+                    sila.innerHTML="haslo silne"
+
                 }
                 else {
-                    haslo_info.style.color="lime"
-                    haslo_info.innerHTML="Prawie silne hasło"
+                    sila.style.color="lime"
+                    sila.innerHTML="haslo prawie silne"
                 }
             }
-            if (haslo.includes("tech19") || haslo.includes("TECH19")){
-                document.getElementById("tech19").innerHTML="hasło zawiera tech19"
-            }
-            else {
-                document.getElementById("tech19").innerHTML="hasło nie zawiera tech19"
-            }
-        
-    }
-    function zmienkolor(kolor){
-        document.getElementById("kwadratduzy").style.backgroundColor=kolor
-    }
-    function zmienksztalt(procent){
-        document.getElementById("kwadratduzy").style.borderRadius=procent
-    }
-    function zmienkolornazw(kolor){
-        document.getElementById("nazw").style.color=kolor
-    }
-    </script>
-
+        }
+        function zmienkolorduzego(kolor){
+            document.getElementById("duzy").style.backgroundColor=kolor
+        }
+        function zmienksztalt(procent){
+            document.getElementById("duzy").style.borderRadius=procent
+        }
+        function zmienkolornazw(kolor){
+            document.getElementById("nazw").style.color=kolor
+        }
+        function procenty() {
+            let percentage = document.getElementById("procent").value;
+            let width = 300 * (percentage / 100); 
+            let height = 300 * (percentage / 100); 
+            document.getElementById("duzy").style.width = width + "px"; 
+            document.getElementById("duzy").style.height = height + "px"; 
+        }
+</script>
 </body>
 </html>
