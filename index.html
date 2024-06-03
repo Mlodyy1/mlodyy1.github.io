@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,145 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #duzy{
+        #naglowek {
+            background-color: blue;
+        }
+        #baner {
             background-color: red;
-            width: 300px;
-            height: 300px;
-        }
-        #maly1,#maly2,#maly3{
-            width: 100px;
-            height: 100px;
-            float: left;
-        }
-        #maly1{
-            background-color: yellow;
-        }
-        #maly2{
-            background-color: aqua;
-        }
-        #maly3{
-            background-color: aquamarine;
         }
     </style>
 </head>
 <body>
-    <h1 id="nazw">Jakub Młodojewski</h1>
-    <p id="oceny"></p>
-    <input type="button" value="info" onclick="info_oceny()">
-    <p id="oceny_info"></p>
-    <input type="password" name="" id="haslo">
-    <input type="button" value="sila" onclick="sprawdzsile()">
-    <p id="sila"></p>
-    <p id="tech19"></p>
-    <div id="duzy"></div>
-    <div id="maly1" onmouseover="zmienkolorduzego('yellow')" onmouseout="zmienkolorduzego('red')"></div>
-    <div id="maly2" onmouseover="zmienksztalt('50%')" onmouseout="zmienksztalt('0%')"></div>
-    <div id="maly3" onmouseover="zmienkolornazw('yellow')" onmouseout="zmienkolornazw('black')"></div><br>
-    <input type="number" name="" id="procent" value="100" onkeyup="procenty()">
     <script>
-        let ocena1 = Math.floor(Math.random()*6)+1
-        let ocena2 = Math.floor(Math.random()*6)+1
-        let ocena3 = Math.floor(Math.random()*6)+1
-        let ocena4 = Math.floor(Math.random()*6)+1
-        let ocena5 = Math.floor(Math.random()*6)+1
-        let ocena6 = Math.floor(Math.random()*6)+1
-        let ocena7 = Math.floor(Math.random()*6)+1
-        let ocena8 = Math.floor(Math.random()*6)+1
-        let ocena9 = Math.floor(Math.random()*6)+1
-        let ocena10 = Math.floor(Math.random()*6)+1
-        const oceny = [ocena1,ocena2,ocena3,ocena4,ocena5,ocena6,ocena7,ocena8,ocena9,ocena10]
-        document.getElementById("oceny").innerHTML=oceny
-        function info_oceny(){
-            let suma = 0
-            for (let i=0;i<oceny.length;i++){
-                suma+=oceny[i]
-            }
-            srednia = (suma/oceny.length).toFixed(2)
-            document.getElementById("oceny_info").innerHTML+="Średnia: "+srednia+"<br>"
-            zachowanie = oceny[oceny.length-1]
-            switch(zachowanie){
-                case 1:
-                    zachowanie = "Ndst"
-                    break;
-                case 2:
-                    zachowanie="Dop"
-                    break;
-                case 3:
-                    zachowanie="Dst"
-                    break;
-                case 4:
-                    zachowanie="Db"
-                    break;
-                case 5:
-                    zachowanie="Bdb"
-                    break;
-                case 6:
-                    zachowanie="Cel"
-                    break;
-                default:
-                    zachowanie="Blad"
-                    break;
-            }
-            document.getElementById("oceny_info").innerHTML+="Ocena z zachowania: "+zachowanie+"<br>"
-            if (oceny.includes(1)){
-                document.getElementById("oceny_info").innerHTML+="Czy promocja: Nie <br>"
-            }
-            else {
-                document.getElementById("oceny_info").innerHTML+="Czy promocja: Tak <br>"
-            }
-            let najwyzsza = Math.max(...oceny)
-            document.getElementById("oceny_info").innerHTML+="Najwysza ocena: "+najwyzsza+"<br>"
-
+        const kolorki = ["red", "blue", "yellow", "green", "purple", "rgb(12,3,223)", "rgb(11,4,220)", "rgb(220,220,200)"];
+        function kolory() {
+            const ilosc = kolorki.length;
+            const losowy = Math.floor(Math.random() * ilosc);
+            document.getElementById("info").innerHTML = `
+                Ilość kolorów: ${ilosc}<br>
+                Kolory: ${kolorki.join(", ")}<br>
+                Losowy kolor: ${kolorki[losowy]}<br>
+                Pierwszy kolor: ${kolorki[0]}<br>
+                Ostatni kolor: ${kolorki[ilosc - 1]}<br>
+            `;
+            document.getElementById("nazw").style.color = kolorki[losowy];
         }
-        function sprawdzsile(){
-            let haslo = document.getElementById("haslo").value
-            let sila = document.getElementById("sila")
-            if (haslo==""){
-                sila.style.color="red"
-                sila.innerHTML="Hasło puste"
-            }
-            else if (haslo.length<=4){
-                sila.style.color="pink"
-                sila.innerHTML="Hasło bardzo słabe"
-            }
-            else if (haslo.length >= 5 && haslo.length <= 8){
-                if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo)){
-                    sila.style.color="orange"
-                    sila.innerHTML="Hasło średnie"
-                }
-                else {
-                    sila.style.color="yellow"
-                    sila.innerHTML="Hasło słabe"
-                }
-            }
-            else if (haslo.length >8){
-                if (/[A-Z]/.test(haslo) && /[a-z]/.test(haslo) && /[0-9]/.test(haslo)){
-                    sila.style.color="green"
-                    sila.innerHTML="haslo silne"
-
-                }
-                else {
-                    sila.style.color="lime"
-                    sila.innerHTML="haslo prawie silne"
-                }
-            }
+        function wypisz() {
+            const opinia = document.getElementById("opinia").value;
+            const info_opinia = document.getElementById("info_opinia");
+            info_opinia.innerHTML = `Twoja opinia: ${opinia}<br>`;
         }
-        function zmienkolorduzego(kolor){
-            document.getElementById("duzy").style.backgroundColor=kolor
+        function ilosc() {
+            const opinia = document.getElementById("opinia").value;
+            const info_opinia = document.getElementById("info_opinia");
+            info_opinia.innerHTML = `Ilość znaków: ${opinia.length}<br>`;
         }
-        function zmienksztalt(procent){
-            document.getElementById("duzy").style.borderRadius=procent
+        function litery() {
+            const opinia = document.getElementById("opinia").value;
+            const info_opinia = document.getElementById("info_opinia");
+            info_opinia.innerHTML = `
+                Małymi: ${opinia.toLowerCase()}<br>
+                Dużymi: ${opinia.toUpperCase()}<br>
+            `;
         }
-        function zmienkolornazw(kolor){
-            document.getElementById("nazw").style.color=kolor
+        function zmienkolor(kolor) {
+            document.getElementById("naglowek").style.backgroundColor = kolor;
         }
-        function procenty() {
-            let percentage = document.getElementById("procent").value;
-            let width = 300 * (percentage / 100); 
-            let height = 300 * (percentage / 100); 
-            document.getElementById("duzy").style.width = width + "px"; 
-            document.getElementById("duzy").style.height = height + "px"; 
+        function zmienlosowy() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            document.getElementById("naglowek").style.backgroundColor = `rgb(${r},${g},${b})`;
         }
-</script>
+        function a() {
+            const opinia = document.getElementById("opinia").value;
+            const info_opinia = document.getElementById("info_opinia");
+            const count = (opinia.match(/a/gi) || []).length;
+            info_opinia.innerHTML = `Wystąpienia litery 'a': ${count}<br>`;
+        }
+        function slowo() {
+            const opinia = document.getElementById("opinia").value.trim();
+            const words = opinia.split(/\s+/);
+            const firstWord = words[0] || '';
+            const lastWord = words[words.length - 1] || '';
+            const info_opinia = document.getElementById("info_opinia");
+            info_opinia.innerHTML = `
+                Pierwsze słowo: ${firstWord}<br>
+                Ostatnie słowo: ${lastWord}<br>
+            `;
+        }
+    </script>
+<div id="naglowek">
+    <h1 id="baner">Baner</h1>
+    <h1 id="nazw">Michał Bąkowski</h1>
+</div>
+<h1 id="zielony" onmouseover="zmienkolor('green')" onmouseout="zmienkolor('blue')">zielony</h1>
+<h1 id="zolty" onmouseover="zmienkolor('yellow')" onmouseout="zmienkolor('blue')">zolty</h1>
+<h1 id="bialy" onmouseover="zmienkolor('white')" onmouseout="zmienkolor('blue')">bialy</h1>
+<h1 id="losowy" onmouseover="zmienlosowy()" onmouseout="zmienkolor('blue')">losowy</h1>
+<input type="button" value="działaj!" onclick="kolory()">
+<p id="info"></p>
+<p>Podaj swoją opinię</p>
+<input type="text" id="opinia">
+<input type="button" value="wypisz opinie" onclick="wypisz()">
+<input type="button" value="ilosc znakow" onclick="ilosc()">
+<input type="button" value="tekst wielkimi i malymi literami" onclick="litery()">
+<input type="button" value="wystapienia litery a" onclick="a()">
+<input type="button" value="pierwsze i ostatnie slowo w tekscie" onclick="slowo()">
+<p id="info_opinia"></p>
 </body>
 </html>
